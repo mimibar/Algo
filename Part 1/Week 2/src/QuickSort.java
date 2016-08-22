@@ -7,17 +7,23 @@
  *           chosen as pivots, so we'll ask you to explore three different pivoting rules.
  * @score
  */
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class QuickSort {
 
-  double c = 0;// comparisons
+  long c = 0;// comparisons
   private int rule;
 
-  public QuickSort(int i) {
-    rule = i;// pivoting rule
+  /**
+   * @param r
+   *          1 if first, 2 if last
+   */
+  public QuickSort(int r) {
+    rule = r;// pivoting rule
   }
 
   /**
@@ -60,19 +66,29 @@ public class QuickSort {
    * @param r
    * @return
    */
-  private double quickSort(int[] A, int l, int r) {
+  private long quickSort(int[] A, int l, int r) {
     if (r - l < 1)
       return c;
-    int p = choosePivot(l, r);
+    int p = choosePivot(A, l, r);
     p = partition(A, p, l, r);
     quickSort(A, l, p - 1);// left
     quickSort(A, p + 1, r);// right
     return c;
   }
 
-  private int choosePivot(int l, int r) {
+  /**
+   * @param A
+   * @param l
+   * @param r
+   * @return
+   */
+  private int choosePivot(int[] A, int l, int r) {
     switch (rule) {
-    case 1:
+    case 2:// last
+      // Recall from the lectures that, just before the main Partition subroutine, you should
+      // exchange the pivot element (i.e., the last element) with the first element.
+      swap(A, l, r);
+    case 1:// first
       return l;
     }
 
@@ -89,40 +105,56 @@ public class QuickSort {
     // Test cases previously posted by learner SzuHsien Lee.
     //
     // https://dl.dropboxusercontent.com/u/20888180/AlgI_wk2_testcases/10.txt
-    //
     // https://dl.dropboxusercontent.com/u/20888180/AlgI_wk2_testcases/100.txt
-    //
     // https://dl.dropboxusercontent.com/u/20888180/AlgI_wk2_testcases/1000.txt
     //
     // Answers are:
     //
     // size first last median
-    //
     // 10 25 29 21
-    //
     // 100 615 587 518
-    //
     // 1000 10297 10184 8921
 
+    // 10000 162085?
+
+    System.out.println("size\tfirst\tlast\tmedian");
+
+    int n = 10;
+    int[] a = read(n, "10");
+    System.out.println(n + "\t" + new QuickSort(1).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
+        + new QuickSort(2).quickSort(a, 0, n - 1));// last
+
+    n = 100;
+    a = read(n, "100");
+    System.out.println(n + "\t" + new QuickSort(1).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
+        + new QuickSort(2).quickSort(a, 0, n - 1));// last
+
+    n = 1000;
+    a = read(n, "1000");
+    System.out.println(n + "\t" + new QuickSort(1).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
+        + new QuickSort(2).quickSort(a, 0, n - 1));// last
+
+    n = 10000;// all of the integers between 1 and 10,000 (inclusive, with no repeats) in
+    // unsorted order
+    a = read(n, "_32387ba40b36359a38625cbb397eee65_QuickSort");
+    System.out.println(n + "\t" + new QuickSort(1).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
+        + new QuickSort(2).quickSort(a, 0, n - 1));// last
+  }
+
+  private static int[] read(int n, String s) {
+    int[] a = new int[n];
     Scanner in;
     try {
-      // in = new Scanner(new File("bin/quiz/_32387ba40b36359a38625cbb397eee65_QuickSort.txt"));
-      in = new Scanner(new File("bin/1000.txt"));
-
-      int n = 1000;// all of the integers between 1 and 10,000 (inclusive, with no repeats) in
-      // unsorted order
-      int[] a = new int[n];
-
+      in = new Scanner(new File("bin/" + s + ".txt"));
       for (int i = 0; i < n; i++) {
         a[i] = in.nextInt();
       }
-
-      // For the first part of the programming assignment, you should always use the first element
-      // of the array as the pivot element.
-      System.out.println(new QuickSort(1).quickSort(a, 0, n - 1));// 3
-
     } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
+
+    return a;
   }
 
 }
