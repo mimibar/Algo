@@ -5,7 +5,7 @@
  * @question Your task is to compute the total number of comparisons used to sort the given input
  *           file by QuickSort. As you know, the number of comparisons depends on which elements are
  *           chosen as pivots, so we'll ask you to explore three different pivoting rules.
- * @score
+ * @score 100%
  */
 
 import java.io.File;
@@ -42,7 +42,7 @@ public class QuickSort {
     c += (r - l);
     int i = l + 1;
     for (int j = l + 1; j <= r; j++) {
-      if (A[j] < A[p]) {
+      if (A[j] < p) {
         swap(A, j, i);
         i++;
       }
@@ -79,19 +79,48 @@ public class QuickSort {
   /**
    * @param A
    * @param l
+   *          left
    * @param r
-   * @return
+   *          right
+   * @return the value at the pivot index
    */
   private int choosePivot(int[] A, int l, int r) {
     switch (rule) {
-    case 2:// last
-      // Recall from the lectures that, just before the main Partition subroutine, you should
-      // exchange the pivot element (i.e., the last element) with the first element.
-      swap(A, l, r);
-    case 1:// first
-      return l;
-    }
+      case 1:// first
+        return A[l];
+      case 2:// last
+        // Recall from the lectures that, just before the main Partition subroutine, you should
+        // exchange the pivot element (i.e., the last element) with the first element.
+        swap(A, l, r);
+        return A[l];
 
+      case 3:// median-of-three
+        // Consider the first, middle, and final elements of the given array. (If the array has odd
+        // length it should be clear what the "middle" element is; identify which of these three
+        // elements is the median (i.e., the one whose value is in between the other two), and use
+        // this as your pivot.
+        // max
+        int max, min;// maxindex, minindex
+        if (A[l] >= A[r]) {
+          max = l;
+          min = r;
+
+        } else {
+          max = r;
+          min = l;
+        }
+
+        // int max = Math.max(A[l], A[r]);
+        // int min = Math.min(A[l], A[r]);
+        int m = l + (r - l) / 2;
+
+        // return (m <=min) ? min : ((m > max) ? max : m);
+        swap(A, l, (A[m] >= A[max]) ? max : (A[m] > A[min] ? m : min));
+        // (including exchanging the pivot element with the first element just before the main
+        // Partition subroutine).
+        return A[l];
+
+    }
     return -1;
   }
 
@@ -115,37 +144,40 @@ public class QuickSort {
     // 100 615 587 518
     // 1000 10297 10184 8921
 
-    // 10000 162085?
+    // 10000 162085? 164123? 138382?
 
     System.out.println("size\tfirst\tlast\tmedian");
 
     int n = 10;
     int[] a = read(n, "10");
     System.out.println(n + "\t" + new QuickSort(1).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
-        + new QuickSort(2).quickSort(a, 0, n - 1));// last
+        + new QuickSort(2).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
+        + new QuickSort(3).quickSort(a, 0, n - 1));// last
 
     n = 100;
     a = read(n, "100");
     System.out.println(n + "\t" + new QuickSort(1).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
-        + new QuickSort(2).quickSort(a, 0, n - 1));// last
+        + new QuickSort(2).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
+        + new QuickSort(3).quickSort(a, 0, n - 1));// last
 
     n = 1000;
     a = read(n, "1000");
     System.out.println(n + "\t" + new QuickSort(1).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
-        + new QuickSort(2).quickSort(a, 0, n - 1));// last
+        + new QuickSort(2).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
+        + new QuickSort(3).quickSort(a, 0, n - 1));// last
 
-    n = 10000;// all of the integers between 1 and 10,000 (inclusive, with no repeats) in
-    // unsorted order
+    // all of the integers between 1 and 10,000 (inclusive, with no repeats) in unsorted order
+    n = 10000;
     a = read(n, "_32387ba40b36359a38625cbb397eee65_QuickSort");
     System.out.println(n + "\t" + new QuickSort(1).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
-        + new QuickSort(2).quickSort(a, 0, n - 1));// last
+        + new QuickSort(2).quickSort(Arrays.copyOf(a, n), 0, n - 1) + "\t"
+        + new QuickSort(3).quickSort(a, 0, n - 1));// last
   }
 
   private static int[] read(int n, String s) {
     int[] a = new int[n];
-    Scanner in;
     try {
-      in = new Scanner(new File("bin/" + s + ".txt"));
+      Scanner in = new Scanner(new File("bin/" + s + ".txt"));
       for (int i = 0; i < n; i++) {
         a[i] = in.nextInt();
       }
