@@ -177,7 +177,7 @@ public class QuickSort {
   private static int[] read(int n, String s) {
     int[] a = new int[n];
     try {
-      Scanner in = new Scanner(new File("bin/" + s + ".txt"));
+      Scanner in = new Scanner(new File("test/" + s + ".txt"));
       for (int i = 0; i < n; i++) {
         a[i] = in.nextInt();
       }

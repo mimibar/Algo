@@ -39,7 +39,7 @@ public class KargerMinCut {
 
   private static void read() {
     try {
-      Scanner in = new Scanner(new File("bin/_f370cd8b4d3482c940e4a57f489a200b_kargerMinCut.txt"));
+      Scanner in = new Scanner(new File("test/_f370cd8b4d3482c940e4a57f489a200b_kargerMinCut.txt"));
       // Scanner in = new Scanner(System.in);
 
       while (in.hasNextLine()) {

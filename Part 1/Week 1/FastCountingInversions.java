@@ -134,7 +134,7 @@ public class FastCountingInversions {
                 0, 99));// 2372
     Scanner in;
     try {
-      in = new Scanner(new File("bin/quiz/_bcb5c6658381416d19b01bfc1d3993b5_IntegerArray.txt"));
+      in = new Scanner(new File("test/_bcb5c6658381416d19b01bfc1d3993b5_IntegerArray.txt"));
       int n = 100000;
       int[] a = new int[n];
 
@@ -145,6 +145,8 @@ public class FastCountingInversions {
       System.out.println(new FastCountingInversions().MergeCount(a, 0, n - 1));// 3
 
     } catch (FileNotFoundException e) {
+      e.printStackTrace();
+
     }
 
   }

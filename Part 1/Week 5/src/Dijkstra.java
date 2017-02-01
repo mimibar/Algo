@@ -87,7 +87,7 @@ public class Dijkstra {
   public static void main(String[] args) {
     Scanner in;
     try {
-      in = new Scanner(new File("bin/_dcf1d02570e57d23ab526b1e33ba6f12_dijkstraData.txt"));
+      in = new Scanner(new File("test/_dcf1d02570e57d23ab526b1e33ba6f12_dijkstraData.txt"));
       int V = 200;
 
       // in = new Scanner(System.in);

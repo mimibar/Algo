@@ -14,16 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>quiz</name>
-			<type>2</type>
-			<location>B:/Dropbox/Education &amp; Training/MOOCs/Coursera/Stanford Algorithms Design and Analysis/Part 1/programming assignment</location>
-		</link>
-		<link>
-			<name>test</name>
-			<type>2</type>
-			<location>B:/Dropbox/Education &amp; Training/MOOCs/Coursera/Stanford Algorithms Design and Analysis/Part 1/programming assignment/AlgI_wk2_testcases</location>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -30,7 +30,7 @@ public class TwoSum {
       // The file contains 1 million integers, both positive and negative (there might be some
       // repetitions!)
       in = new Scanner(
-          new File("bin/_6ec67df2804ff4b58ab21c12edcb21f8_algo1-programming_prob-2sum.txt"));
+          new File("test/_6ec67df2804ff4b58ab21c12edcb21f8_algo1-programming_prob-2sum.txt"));
       // in = new Scanner(System.in);
       int ans = 0;
       HashSet<Long> H = new HashSet<>();

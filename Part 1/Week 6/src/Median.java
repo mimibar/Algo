@@ -30,7 +30,7 @@ public class Median {
     Long ans = 0L;
     Scanner in;
     try {
-      in = new Scanner(new File("bin/_6ec67df2804ff4b58ab21c12edcb21f8_Median.txt"));
+      in = new Scanner(new File("test/_6ec67df2804ff4b58ab21c12edcb21f8_Median.txt"));
       // in = new Scanner(System.in);
       while (in.hasNext()) {
 

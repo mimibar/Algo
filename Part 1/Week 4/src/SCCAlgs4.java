@@ -52,7 +52,7 @@ public class SCCAlgs4 {
     // I had Stack Overflows that I solved adding the -Xss8M option to get a 8MB stack (-Xss208m)
     Scanner in;
     try {
-      in = new Scanner(new File("bin/_410e934e6553ac56409b2cb7096a44aa_SCC.txt"));
+      in = new Scanner(new File("test/_410e934e6553ac56409b2cb7096a44aa_SCC.txt"));
       int V = 875714, E = 5105043;
 
       // in = new Scanner(System.in);
